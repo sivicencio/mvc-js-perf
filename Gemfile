@@ -14,7 +14,7 @@ gem 'devise'
 gem 'figaro'
 gem 'rolify'
 gem 'simple_form', '>= 3.0.0.rc'
-gem 'slim'
+gem 'slim-rails'
 gem 'thin'
 group :development do
   gem 'better_errors'
@@ -22,9 +22,6 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
-  gem 'haml-rails'
-  gem 'haml2slim'
-  gem 'html2haml'
   gem 'hub', :require=>nil
   gem 'quiet_assets'
   gem 'rb-fchange', :require=>false
