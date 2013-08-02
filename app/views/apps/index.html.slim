@@ -1,0 +1,16 @@
+h3 Apps
+.span8
+  table.table.table-condensed
+    thead
+      tr
+        th Name
+        th
+        th
+    tbody
+      - for app in @apps
+        tr
+          td = link_to app.name, app.project_url
+          td = link_to("Edit app", app_path(app), :method => :put, :class => 'btn btn-mini')
+          td = link_to("Delete app", app_path(app), :data =>   confirm=("Are you sure?" ) , :method => :delete, :class => 'btn btn-mini')
+
+div = link_to 'Add app', new_app_path
