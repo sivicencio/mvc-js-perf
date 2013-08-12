@@ -1,4 +1,11 @@
-h3 Home
-- @users.each do |user|
-  p
-    | User: #{link_to user.name, user}
+h3 Available Apps
+ul
+  - @apps.each do |app|
+    li
+      = link_to app.name, app
+
+h3 Available Frameworks
+ul
+  - @frameworks.each do |framework|
+    li
+      = link_to framework.name, framework

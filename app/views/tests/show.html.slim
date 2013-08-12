@@ -1,0 +1,13 @@
+h2 Test: #{@test.name} - #{@app.name}
+= link_to 'Edit', edit_app_test_path(@app, @test), class: 'btn'
+
+p Description: #{@test.description}
+
+.test_script
+  h4 Script: 
+  .script-content
+    - @test.script.split("\n").each do |line|
+      = line
+      br
+
+p Total runs: #{@test.total_runs}

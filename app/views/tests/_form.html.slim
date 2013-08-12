@@ -1,0 +1,7 @@
+= simple_form_for [@app, @test], html: {class: 'form-vertical test-form' } do |f|
+  = f.error_notification
+  = f.input :name, autofocus: true
+  = f.input :description, autofocus: true
+  = f.input :script, autofocus: true
+  = f.input :total_runs, autofocus: true
+  = f.button :submit, class: 'btn-primary'

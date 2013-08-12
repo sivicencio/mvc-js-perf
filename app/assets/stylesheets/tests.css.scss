@@ -1,0 +1,24 @@
+// Place all the styles related to the Tests controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin script-base {
+  font-family: Courier;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px rgba(0,0,0,.15);
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.script-content {
+  @include script-base;
+}
+
+.test-form {
+  #test_script {
+    @include script-base;
+    width: 50%;
+    height: 100px;
+  }
+}
+

@@ -1,0 +1,10 @@
+h3 Framework #{@framework.name}
+
+= link_to 'Edit', edit_framework_path(@framework), class: 'btn'
+p
+  strong Url: 
+  = @framework.url
+
+p = @framework.instances.count
+
+= link_to 'Back', frameworks_path

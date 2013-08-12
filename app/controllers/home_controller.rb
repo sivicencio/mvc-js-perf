@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @users = User.all
+    @apps = App.all
+    @frameworks = Framework.all
   end
 end

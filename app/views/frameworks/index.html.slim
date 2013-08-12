@@ -1,0 +1,17 @@
+h3 Frameworks
+table.table.table-condensed
+  thead
+    tr
+      th Name
+      th URL
+      th
+      th
+  tbody
+    - @frameworks.each do |framework|
+      tr
+        td = link_to framework.name, framework
+        td = link_to framework.url, framework.url, target: 'blank'
+        td = link_to 'Edit', edit_framework_path(framework), class: 'btn btn-mini'
+        td = link_to 'Destroy', framework, confirm: 'Are you sure?', method: :delete, class: 'btn btn-mini'
+
+= link_to 'Add Framework', new_framework_path, class: 'btn'

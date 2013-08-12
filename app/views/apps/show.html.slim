@@ -1,0 +1,53 @@
+h2 = @app.name
+
+p
+  = link_to '(Project URL)', @app.project_url, target: 'blank'
+
+.tests
+  .tests-header
+    h3
+      | Tests
+      = link_to 'Add one', new_app_test_path(@app), class: 'btn'
+
+  - if @app.tests.count == 0
+    i No tests associated to #{@app.name}
+  - else
+    table.table.table-condensed
+        thead
+          tr
+            th Name
+            th Description
+            th Total runs
+            th
+            th
+        tbody     
+          - for test in @app.tests
+            tr
+              td = link_to test.name, app_test_path(@app, test)
+              td = test.description
+              td = test.total_runs
+              td = link_to("Edit", edit_app_test_path(@app, test), class: 'btn btn-mini')
+              td = link_to "Delete", app_test_path(@app, test), data: { confirm: "Are you sure?" } , method: :delete, class: 'btn btn-mini'
+
+.instances
+  .instances-header
+    h3
+      | Instances
+      = link_to 'Add instance', new_app_instance_path(@app), class: 'btn'
+  - if @app.frameworks.count == 0
+    i No instances associated to #{@app.name}
+  - else
+    table.table.table-condensed
+        thead
+          tr
+            th Name
+            th URL
+            th
+        tbody     
+          - for instance in @app.instances
+            tr
+              td = instance.framework.name
+              td = link_to instance.url, instance.url, target: 'blank'
+              td = link_to "Delete", app_instance_path(@app, instance), data: { confirm: "Are you sure?" } , method: :delete, class: 'btn btn-mini'
+
+= link_to 'Back', apps_path
