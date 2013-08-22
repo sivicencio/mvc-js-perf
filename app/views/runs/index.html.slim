@@ -5,13 +5,16 @@ h4 Script associated
 .runs-menu
   - if @runs.count < @test.total_runs
     .exec-runs.btn-group
-      button.btn data-total="1" Run next
-      button.btn data-total="#{@test.total_runs - @runs.count}" Run all remaining
+      button.btn.run data-total="1" Run next
+      button.btn.run data-total="#{@test.total_runs - @runs.count}" Run all remaining
+      button.btn.refresh Refresh all
     = form_tag run_test_path(@test, @instance), method: :post, class: 'exec-form' do
       = hidden_field_tag :total, ''
       
   - else
-    = link_to 'Clear runs', clear_runs_path(@test, @instance), method: :delete, class: 'btn'
+    .btn-group
+      = link_to 'Clear runs', clear_runs_path(@test, @instance), method: :delete, class: 'btn'
+      button.btn.refresh Refresh all
 .runs-details
     - if @runs.count == 0
       i = 'No runs executed yet'
@@ -20,13 +23,23 @@ h4 Script associated
         thead
           tr
             th Number
+            th Load time (ms)
+            th TTFB (ms)
             th URL
-            th JSON URL
+            th JSON URL            
         tbody
         - for run in @runs
           tr
             td = run.run_number
+            td = run.data['statusCode'] == 200 ? run.data['runs']['1']['firstView']['loadTime'] : 'In progress'
+            td = run.data['statusCode'] == 200 ? run.data['runs']['1']['firstView']['TTFB']: 'In progress'
             td = link_to run.url, run.url
             td = link_to run.url_json, run.url_json
+      - if @ready
+        .statistics          
+          h4 Average load time: #{@average_load_time}
+          h4 Average TTFB #{@average_ttfb}
+
+
     
 = link_to 'Back to test', app_test_path(@test.app, @test), class: 'btn'
