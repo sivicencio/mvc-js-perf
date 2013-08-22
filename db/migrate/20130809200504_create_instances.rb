@@ -4,6 +4,7 @@ class CreateInstances < ActiveRecord::Migration
       t.references :app, index: true
       t.references :framework, index: true
       t.string :url
+      
       t.timestamps
     end
   end

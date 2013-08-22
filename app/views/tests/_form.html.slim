@@ -2,6 +2,11 @@
   = f.error_notification
   = f.input :name, autofocus: true
   = f.input :description, autofocus: true
-  = f.input :script, autofocus: true
+  = f.label :script
+  = f.hint 'Note: the first two lines are automatically added at the beginning of the script'
+  .script-content
+    = get_pre_script(":instance_specific_url", true)
+  = f.input_field :script, autofocus: true
   = f.input :total_runs, autofocus: true
+  = f.input :location, collection: @locations.values, label_method: lambda {|ts| ts['Label'] + ' - ' + ts['Browser']}
   = f.button :submit, class: 'btn-primary'

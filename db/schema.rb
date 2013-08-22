@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130809200504) do
+ActiveRecord::Schema.define(version: 20130821231226) do
 
   create_table "apps", force: true do |t|
     t.string   "name"
@@ -48,6 +48,29 @@ ActiveRecord::Schema.define(version: 20130809200504) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "runs", force: true do |t|
+    t.integer  "instance_id"
+    t.integer  "test_id"
+    t.string   "url"
+    t.string   "url_json"
+    t.integer  "run_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "runs", ["instance_id"], name: "index_runs_on_instance_id"
+  add_index "runs", ["test_id"], name: "index_runs_on_test_id"
+
+  create_table "test_settings", force: true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.integer  "test_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "test_settings", ["test_id"], name: "index_test_settings_on_test_id"
 
   create_table "tests", force: true do |t|
     t.string   "name"

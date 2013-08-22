@@ -1,11 +1,15 @@
 class InstancesController < ApplicationController
+  def show
+    @instance = Instance.find(params[:instance])
+  end
+
   def new
     @app = App.find(params[:app_id])
   end
 
   def create
     @app = App.find(params[:app_id])
-    @test = @app.instances.create(instance_params)
+    @app.instances.create(instance_params)
     redirect_to app_path(@app), notice: 'Instance added'
   end
 

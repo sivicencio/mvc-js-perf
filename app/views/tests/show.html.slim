@@ -1,13 +1,26 @@
 h2 Test: #{@test.name} - #{@app.name}
+p = @test.description
 = link_to 'Edit', edit_app_test_path(@app, @test), class: 'btn'
 
-p Description: #{@test.description}
 
 .test_script
   h4 Script: 
+  span.help-block Note: the first two lines are automatically added.
   .script-content
-    - @test.script.split("\n").each do |line|
-      = line
-      br
-
-p Total runs: #{@test.total_runs}
+    = get_full_script(":instance_specific_url", @test.script, true)
+h4 Runs by instance
+- if @app.instances.count == 0
+  i No instances associated to #{@app.name}
+- else
+  table.table.table-condensed
+    thead
+      tr
+        th Instance
+        th Run times
+        th
+    tbody
+    - for instance in @app.instances
+      tr
+        td = instance.framework.name
+        td = @test.runs.where(instance_id: instance.id).count.to_s + '/' + @test.total_runs.to_s
+        td = link_to "Show runs", test_instance_runs_path(@test, instance), :class => 'btn btn-mini'

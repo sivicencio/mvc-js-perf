@@ -16,6 +16,7 @@ gem 'rolify'
 gem 'simple_form', '>= 3.0.0.rc'
 gem 'slim-rails'
 gem 'thin'
+gem 'faraday'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]

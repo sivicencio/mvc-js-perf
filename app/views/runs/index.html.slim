@@ -1,0 +1,32 @@
+h3 Runs for #{@test.name} | #{@test.app.name} with #{@instance.framework.name}
+h4 Script associated
+.script-run.script-content
+  = get_full_script(@instance.url, @test.script, true)
+.runs-menu
+  - if @runs.count < @test.total_runs
+    .exec-runs.btn-group
+      button.btn data-total="1" Run next
+      button.btn data-total="#{@test.total_runs - @runs.count}" Run all remaining
+    = form_tag run_test_path(@test, @instance), method: :post, class: 'exec-form' do
+      = hidden_field_tag :total, ''
+      
+  - else
+    = link_to 'Clear runs', clear_runs_path(@test, @instance), method: :delete, class: 'btn'
+.runs-details
+    - if @runs.count == 0
+      i = 'No runs executed yet'
+    - else
+      table.table.table-condensed
+        thead
+          tr
+            th Number
+            th URL
+            th JSON URL
+        tbody
+        - for run in @runs
+          tr
+            td = run.run_number
+            td = link_to run.url, run.url
+            td = link_to run.url_json, run.url_json
+    
+= link_to 'Back to test', app_test_path(@test.app, @test), class: 'btn'
