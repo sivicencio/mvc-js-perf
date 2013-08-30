@@ -8,5 +8,9 @@
     = get_pre_script(":instance_specific_url", true)
   = f.input_field :script, autofocus: true
   = f.input :total_runs, autofocus: true
-  = f.input :location, collection: @locations.values, label_method: lambda {|ts| ts['Label'] + ' - ' + ts['Browser']}
+  - if not @test.test_settings.empty?
+    .current-location
+      h4 Current location
+      = format_settings @test.test_settings
+  = f.input :location, collection: @locations.values, label_method: lambda {|ts| raw ts['Label'] + ' - ' + ts['Browser']}, hint: 'Test will run in this location'
   = f.button :submit, class: 'btn-primary'

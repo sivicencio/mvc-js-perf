@@ -12,11 +12,7 @@ module RunsHelper
   end
 
   def output_script(script)
-    output = ''
-    script.split("\n").each do |line|
-      output += line + tag(:br)
-    end
-    raw output
+    script.split("\n").map {|line| line + tag(:br) }.join.html_safe
   end
 
   def exec_runs(test, instance, current_runs, total)
@@ -40,5 +36,13 @@ module RunsHelper
         current_runs += 1
       end
     end
+  end
+
+  def get_run_data(url)
+    response = Faraday.get url
+    response_body = JSON.parse(response.body)
+    data = response_body['data']
+    data['statusCode'] = response_body['statusCode']
+    data
   end
 end

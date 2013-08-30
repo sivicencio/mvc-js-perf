@@ -1,5 +1,4 @@
 require 'faraday'
-require 'addressable/uri'
 
 class RunsController < ApplicationController
   include RunsHelper
@@ -12,16 +11,12 @@ class RunsController < ApplicationController
     load_time_array = Array.new
     ttfb_array = Array.new
     @runs.each do |run|
-      response = Faraday.get run.url_json
-      response_body = JSON.parse(response.body)
-      data = response_body['data']
-      data['statusCode'] = response_body['statusCode']
-      run.data = data
-      @ready = false if data['statusCode'] != 200
+      run.data = get_run_data run.url_json
+      @ready = false if run.data['statusCode'] != 200
 
       if @ready
-        load_time_array << data['runs']['1']['firstView']['loadTime']
-        ttfb_array << data['runs']['1']['firstView']['TTFB']
+        load_time_array << run.data['runs']['1']['firstView']['loadTime']
+        ttfb_array << run.data['runs']['1']['firstView']['TTFB']
       end
     end
 
