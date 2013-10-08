@@ -2,6 +2,9 @@ h2 Test: #{@test.name} - #{@app.name}
 p = @test.description
 = link_to 'Edit', edit_app_test_path(@app, @test), class: 'btn'
 
+ul
+- for setting in @test.test_settings do
+  li = setting.name + ': ' + setting.value
 
 .test_script
   h4 Script: 

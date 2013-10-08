@@ -17,6 +17,7 @@ p
           tr
             th Name
             th Description
+            th Location
             th Total runs
             th
             th
@@ -25,6 +26,7 @@ p
             tr
               td = link_to test.name, app_test_path(@app, test)
               td = test.description
+              td = test.test_settings.first.value + ' / ' + test.test_settings.last.value
               td = test.total_runs
               td = link_to("Edit", edit_app_test_path(@app, test), class: 'btn btn-mini')
               td = link_to "Delete", app_test_path(@app, test), data: { confirm: "Are you sure?" } , method: :delete, class: 'btn btn-mini'

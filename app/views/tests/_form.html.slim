@@ -12,5 +12,5 @@
     .current-location
       h4 Current location
       = format_settings @test.test_settings
-  = f.input :location, collection: @locations.values, label_method: lambda {|ts| raw ts['Label'] + ' - ' + ts['Browser']}, hint: 'Test will run in this location'
+  = f.input :location, collection: @locations.values, label_method: lambda {|loc| raw loc['Label'] + ' - ' + loc['Browser']}, hint: 'Test will run in this location'
   = f.button :submit, class: 'btn-primary'
