@@ -14,12 +14,4 @@ module RunsHelper
   def output_script(script)
     script.split("\n").map {|line| line + tag(:br) }.join.html_safe
   end
-
-  def get_run_data(url)
-    response = Faraday.get url
-    response_body = JSON.parse(response.body)
-    data = response_body['data']
-    data['statusCode'] = response_body['statusCode']
-    data
-  end
 end

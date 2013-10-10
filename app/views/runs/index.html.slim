@@ -19,27 +19,65 @@ h4 Script associated
     - if @runs.count == 0
       i = 'No runs executed yet'
     - else
-      table.table.table-condensed
-        thead
-          tr
-            th Number
-            th Load time (ms)
-            th TTFB (ms)
-            th URL
-            th JSON URL            
-        tbody
-        - for run in @runs
-          tr
-            td = run.run_number
-            td = run.data['statusCode'] == 200 ? run.data['runs']['1']['firstView']['loadTime'] : 'In progress'
-            td = run.data['statusCode'] == 200 ? run.data['runs']['1']['firstView']['TTFB']: 'In progress'
-            td = link_to run.url, run.url
-            td = link_to run.url_json, run.url_json
-      - if @ready
-        .statistics          
-          h4 Average load time: #{@average_load_time}
-          h4 Average TTFB #{@average_ttfb}
+      .first-view
+        h4 First View
+        table.table.table-condensed
+          thead
+            tr
+              th Number
+              th WPT Id
+              th Load time (ms)
+              th TTFB (ms)
+              th Start render (ms)
+              th Fully loaded (ms)
+              th Speed Index (ms)
+              th DOM elements
+              th WPT Result       
+          tbody
+          - for run in @runs
+            tr
+              td = run.run_number
+              td = run.wpt_id
+              td = run.metric_sets.size > 0 ? run.metric_sets.first_view.load_time : '-'
+              td = run.metric_sets.size > 0 ? run.metric_sets.first_view.ttfb : '-'
+              td = run.metric_sets.size > 0 ? run.metric_sets.first_view.start_render : '-'
+              td = run.metric_sets.size > 0 ? run.metric_sets.first_view.fully_loaded : '-'
+              td = run.metric_sets.size > 0 ? run.metric_sets.first_view.speed_index : '-'
+              td = run.metric_sets.size > 0 ? run.metric_sets.first_view.dom_elements : '-'
+              td
+                = link_to 'UI', run.url, target: 'blank'
+                |  / 
+                = link_to 'JSON', run.url_json, target: 'blank'
 
+      .repeat-view
+        h4 Repeat View
+        table.table.table-condensed
+          thead
+            tr
+              th Number
+              th WPT Id
+              th Load time (ms)
+              th TTFB (ms)
+              th Start render (ms)
+              th Fully loaded (ms)
+              th Speed Index (ms)
+              th DOM elements
+              th WPT Result       
+          tbody
+          - for run in @runs
+            tr
+              td = run.run_number
+              td = run.wpt_id
+              td = run.metric_sets.size > 0 ? run.metric_sets.repeat_view.load_time : '-'
+              td = run.metric_sets.size > 0 ? run.metric_sets.repeat_view.ttfb : '-'
+              td = run.metric_sets.size > 0 ? run.metric_sets.repeat_view.start_render : '-'
+              td = run.metric_sets.size > 0 ? run.metric_sets.repeat_view.fully_loaded : '-'
+              td = run.metric_sets.size > 0 ? run.metric_sets.repeat_view.speed_index : '-'
+              td = run.metric_sets.size > 0 ? run.metric_sets.repeat_view.dom_elements : '-'
+              td
+                = link_to 'UI', run.url, target: 'blank'
+                |  / 
+                = link_to 'JSON', run.url_json, target: 'blank'
 
     
 = link_to 'Back to test', app_test_path(@test.app, @test), class: 'btn'
