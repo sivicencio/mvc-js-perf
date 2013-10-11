@@ -9,7 +9,10 @@ table.table.table-condensed
     - for app in @apps
       tr
         td = link_to app.name, app
-        td = link_to "Edit", edit_app_path(app), :class => 'btn btn-mini'
-        td = link_to("Delete", app, data: { confirm: "Are you sure?"} , :method => :delete, :class => 'btn btn-mini')
+        - if can? :update, App
+          td = link_to "Edit", edit_app_path(app), :class => 'btn btn-mini'
+        - if can? :destroy, App
+          td = link_to("Delete", app, data: { confirm: "Are you sure?"} , :method => :delete, :class => 'btn btn-mini')
 
-= link_to 'Add app', new_app_path, class: 'btn'
+- if can? :create, App
+  = link_to 'Add app', new_app_path, class: 'btn'

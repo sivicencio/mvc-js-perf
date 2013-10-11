@@ -1,6 +1,7 @@
 h3 Framework #{@framework.name}
 
-= link_to 'Edit', edit_framework_path(@framework), class: 'btn'
+- if can? :update, @framework
+  = link_to 'Edit', edit_framework_path(@framework), class: 'btn'
 p
   strong Url: 
   = @framework.url

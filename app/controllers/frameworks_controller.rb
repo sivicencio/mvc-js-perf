@@ -1,5 +1,7 @@
 class FrameworksController < ApplicationController
   before_action :set_framework, only: [:show, :edit, :update, :destroy]
+  authorize_resource
+  skip_authorize_resource only: [:index, :show]
 
   # GET /frameworks
   # GET /frameworks.json

@@ -1,7 +1,5 @@
 class InstancesController < ApplicationController
-  def show
-    @instance = Instance.find(params[:instance])
-  end
+  authorize_resource
 
   def new
     @app = App.find(params[:app_id])

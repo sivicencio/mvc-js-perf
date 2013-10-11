@@ -1,6 +1,7 @@
 h2 Test: #{@test.name} - #{@app.name}
 p = @test.description
-= link_to 'Edit', edit_app_test_path(@app, @test), class: 'btn'
+- if can? :update, @test
+  = link_to 'Edit', edit_app_test_path(@app, @test), class: 'btn btn-default'
 
 ul
 - for setting in @test.test_settings do
@@ -26,4 +27,4 @@ h4 Runs by instance
       tr
         td = instance.framework.name
         td = @test.runs.where(instance_id: instance.id).count.to_s + '/' + @test.total_runs.to_s
-        td = link_to "Show runs", test_instance_runs_path(@test, instance), :class => 'btn btn-mini'
+        td = link_to "Show runs", test_instance_runs_path(@test, instance), :class => 'btn btn-xs'

@@ -11,7 +11,10 @@ table.table.table-condensed
       tr
         td = link_to framework.name, framework
         td = link_to framework.url, framework.url, target: 'blank'
-        td = link_to 'Edit', edit_framework_path(framework), class: 'btn btn-mini'
-        td = link_to 'Destroy', framework, confirm: 'Are you sure?', method: :delete, class: 'btn btn-mini'
+        - if can? :update, Framework
+          td = link_to 'Edit', edit_framework_path(framework), class: 'btn btn-mini'
+        - if can? :destroy, Framework
+          td = link_to 'Destroy', framework, confirm: 'Are you sure?', method: :delete, class: 'btn btn-mini'
 
-= link_to 'Add Framework', new_framework_path, class: 'btn'
+- if can? :create, Framework
+  = link_to 'Add Framework', new_framework_path, class: 'btn'

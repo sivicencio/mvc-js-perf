@@ -1,4 +1,7 @@
 class AppsController < ApplicationController
+  authorize_resource
+  skip_authorize_resource only: [:index, :show]
+
   def index
     @apps = App.all
   end

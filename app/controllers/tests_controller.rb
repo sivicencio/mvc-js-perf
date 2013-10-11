@@ -1,6 +1,8 @@
 class TestsController < ApplicationController
   before_action :initialize_webpagetest, only: [:new, :edit, :update]
   before_action :get_locations, only: [:new, :edit]
+  authorize_resource
+  skip_authorize_resource only: [:show]
 
   def show
     @app = App.find(params[:app_id])
@@ -15,6 +17,7 @@ class TestsController < ApplicationController
   def create
     @app = App.find(params[:app_id])
     @test = @app.tests.create(test_params)
+    location = params[:test][:location]
     location_hash = Hashie::Mash.new(eval location)
     generate_test_settings location_hash if location.present?
     redirect_to app_path(@app), notice: 'Test added'

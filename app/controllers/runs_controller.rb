@@ -3,6 +3,8 @@ require 'faraday'
 class RunsController < ApplicationController
   include RunsHelper
   before_action :initialize_webpagetest, only: [:index, :run_test]
+  authorize_resource
+  skip_authorize_resource only: [:index]
 
   def index
     @test = Test.find(params[:test_id])

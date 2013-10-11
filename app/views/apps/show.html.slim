@@ -1,4 +1,4 @@
-h2.text-muted = @app.name
+h2 = @app.name
 
 p
   = link_to '(Project URL)', @app.project_url, target: 'blank'
@@ -7,7 +7,8 @@ p
   .tests-header
     h3
       | Tests
-      = link_to 'Add one', new_app_test_path(@app), class: 'btn'
+      - if can? :create, Test
+        = link_to 'Add one', new_app_test_path(@app), class: 'btn btn-default'
 
   - if @app.tests.count == 0
     i No tests associated to #{@app.name}
@@ -26,16 +27,19 @@ p
             tr
               td = link_to test.name, app_test_path(@app, test)
               td = test.description
-              td = test.test_settings.first.value + ' / ' + test.test_settings.last.value
+              td = (not test.test_settings.empty?) ? test.test_settings.first.value + ' / ' + test.test_settings.last.value : '-'
               td = test.total_runs
-              td = link_to("Edit", edit_app_test_path(@app, test), class: 'btn btn-mini')
-              td = link_to "Delete", app_test_path(@app, test), data: { confirm: "Are you sure?" } , method: :delete, class: 'btn btn-mini'
+              - if can? :update, test
+                td = link_to("Edit", edit_app_test_path(@app, test), class: 'btn btn-mini')
+              - if can? :destroy, test
+                td = link_to "Delete", app_test_path(@app, test), data: { confirm: "Are you sure?" } , method: :delete, class: 'btn btn-mini'
 
 .instances
   .instances-header
     h3
       | Instances
-      = link_to 'Add instance', new_app_instance_path(@app), class: 'btn'
+      - if can? :create, Instance
+        = link_to 'Add instance', new_app_instance_path(@app), class: 'btn btn-default'
   - if @app.frameworks.count == 0
     i No instances associated to #{@app.name}
   - else
@@ -50,6 +54,7 @@ p
             tr
               td = instance.framework.name
               td = link_to instance.url, instance.url, target: 'blank'
-              td = link_to "Delete", app_instance_path(@app, instance), data: { confirm: "Are you sure?" } , method: :delete, class: 'btn btn-mini'
+              - if can? :destroy, instance
+                td = link_to "Delete", app_instance_path(@app, instance), data: { confirm: "Are you sure?" } , method: :delete, class: 'btn btn-mini'
 
 = link_to 'Back', apps_path
