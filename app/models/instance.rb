@@ -4,4 +4,6 @@ class Instance < ActiveRecord::Base
   has_many :runs, dependent: :destroy
   has_many :tests, through: :runs
   validates :url, presence: :true
+
+  default_scope order('created_at ASC')
 end

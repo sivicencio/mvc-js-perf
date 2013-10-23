@@ -40,12 +40,12 @@ h4 Script associated
             tr
               td = run.run_number
               td = run.wpt_id
-              td = run.metric_sets.size > 0 ? run.metric_sets.first_view.load_time + ' / ' + un.metric_sets.repeat_view.load_time : '-'
-              td = run.metric_sets.size > 0 ? run.metric_sets.first_view.ttfb + ' / ' + run.metric_sets.repeat_view.ttfb : '-'
-              td = run.metric_sets.size > 0 ? run.metric_sets.first_view.start_render + ' / ' + run.metric_sets.repeat_view.start_render : '-'
-              td = run.metric_sets.size > 0 ? run.metric_sets.first_view.fully_loaded + ' / ' + run.metric_sets.repeat_view.fully_loaded : '-'
-              td = run.metric_sets.size > 0 ? run.metric_sets.first_view.speed_index + ' / ' + run.metric_sets.repeat_view.speed_index : '-'
-              td = run.metric_sets.size > 0 ? run.metric_sets.first_view.dom_elements + ' / ' + run.metric_sets.repeat_view.dom_elements : '-'
+              td = run.metric_sets.size > 0 ? "#{run.metric_sets.first_view.load_time} / #{run.metric_sets.repeat_view.load_time}" : '-'
+              td = run.metric_sets.size > 0 ? "#{run.metric_sets.first_view.ttfb}  / #{run.metric_sets.repeat_view.ttfb}" : '-'
+              td = run.metric_sets.size > 0 ? "#{run.metric_sets.first_view.start_render} / #{run.metric_sets.repeat_view.start_render}" : '-'
+              td = run.metric_sets.size > 0 ? "#{run.metric_sets.first_view.fully_loaded} / #{run.metric_sets.repeat_view.fully_loaded}" : '-'
+              td = run.metric_sets.size > 0 ? "#{run.metric_sets.first_view.speed_index} / #{run.metric_sets.repeat_view.speed_index}" : '-'
+              td = run.metric_sets.size > 0 ? "#{run.metric_sets.first_view.dom_elements} / #{run.metric_sets.repeat_view.dom_elements}" : '-'
               td
                 = link_to 'UI', run.url, target: 'blank'
                 |  / 

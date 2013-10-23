@@ -13,7 +13,7 @@ p
   - if @app.tests.count == 0
     i No tests associated to #{@app.name}
   - else
-    table.table.table-condensed
+    table.table.table-condensed.table-striped
         thead
           tr
             th Name
@@ -43,7 +43,7 @@ p
   - if @app.frameworks.count == 0
     i No instances associated to #{@app.name}
   - else
-    table.table.table-condensed
+    table.table.table-condensed.table-striped
         thead
           tr
             th Name

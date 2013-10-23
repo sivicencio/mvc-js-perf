@@ -11,5 +11,21 @@ module ApplicationHelper
     HTML
     html.html_safe
   end
+
+  def nav_link_to(link_text, link_path)
+    if (params[:controller] =~ /apps|tests|instances/) 
+      class_name = link_path == apps_path ? 'active' : ''
+    elsif (params[:controller] =~ /frameworks/) 
+      class_name = link_path == frameworks_path ? 'active' : ''
+    elsif (params[:controller] =~ /users/) 
+      class_name = link_path == users_path ? 'active' : ''
+    else
+      class_name = current_page?(link_path) ? 'active' : ''
+    end
+
+    content_tag(:li, class: class_name) do
+      link_to link_text, link_path
+    end
+  end
   
 end

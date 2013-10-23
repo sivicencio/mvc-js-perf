@@ -1,11 +1,36 @@
-h3 Available Apps
-ul
-  - @apps.each do |app|
-    li
-      = link_to app.name, app
+.jumbotron
+  .container
+    p
+      | We try to accomplish the not-so-common task of
+      strong<> comparing
+      | the most popular JavaScript MVC frameworks between each other in terms of their
+      strong< performance
+      | .
 
-h3 Available Frameworks
-ul
-  - @frameworks.each do |framework|
-    li
-      = link_to framework.name, framework
+.col-md-6
+  h1.page-header
+    | Popular MVC apps
+    br
+    small Most used or interesting ones
+  ul.list-group
+    - @apps.each do |app|
+      li.list-group-item.clearfix
+        .col-xs-4
+          h4 = link_to app.name, app
+          = link_to 'Source', app.project_url, target: :blank
+        .col-xs-8
+          .panel.panel-default
+            .panel-heading Tests
+            ul.list-group
+              - for test in app.tests
+                li.list-group-item = link_to test.name, app_test_path(app, test)
+
+.col-md-6
+  h1.page-header
+    | Current frameworks
+    br
+    small Which make all the magic
+  ul.list-group
+    - @frameworks.each do |framework|
+      li.list-group-item
+        = link_to framework.name, framework

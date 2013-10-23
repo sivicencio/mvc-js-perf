@@ -9,7 +9,7 @@ html
         = csrf_meta_tags
         = yield(:head)
   body class=("#{controller_name} #{action_name}") 
-    nav.navbar.navbar-fixed-top role='navigation'
+    nav.navbar.navbar-default.navbar-fixed-top role='navigation'
       .container
         = render 'layouts/navigation'
     #main role="main" 

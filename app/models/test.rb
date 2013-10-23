@@ -7,6 +7,8 @@ class Test < ActiveRecord::Base
   validates :name, presence: :true
   validates :total_runs, numericality: { greater_than: 0 }
 
+  default_scope order('created_at ASC')
+
   #Virtual attribute for setting test location
   def location
   end

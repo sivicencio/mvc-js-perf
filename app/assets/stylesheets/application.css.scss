@@ -13,7 +13,31 @@
  *= require_tree .
 */
 
-body { padding-top: 60px; }
+body { 
+  padding-top: 60px; 
+
+  .navbar-default {
+    ul {
+      li {
+        .user-image {
+          padding: 2px;
+          margin-right: 10px;
+          border: 1px solid #999;
+          border-radius: 2px;
+          background: #FFF;
+
+          .user-gravatar-image {
+            
+          }
+        }
+        
+      }
+    }
+  }
+
+}
+
+
 
 .content {
   padding: 20px;
