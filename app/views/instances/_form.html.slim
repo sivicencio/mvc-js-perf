@@ -1,4 +1,4 @@
-= simple_form_for [@app, @app.instances.build], html: {class: 'form-vertical' } do |f|
+= simple_form_for [@app, @app.instances.build] do |f|
   = f.error_notification
   = f.association :framework
   = f.input :url, autofocus: true

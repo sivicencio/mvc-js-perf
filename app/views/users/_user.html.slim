@@ -1,7 +1,7 @@
 .modal id="role-options-#{user.id}"
   .modal-dialog
     .modal-content
-      = simple_form_for user, :url => user_path(user), :html => {:method => :put, :class => 'form-horizontal' } do |f|
+      = simple_form_for user, :url => user_path(user), :html => {:method => :put } do |f|
         .modal-header
           a.close data-dismiss="modal"  ×
           h3 Change Role
