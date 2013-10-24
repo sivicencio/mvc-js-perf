@@ -21,16 +21,15 @@
         .col-xs-8
           .panel.panel-default
             .panel-heading Tests
-            ul.list-group
+            .list-group
               - for test in app.tests
-                li.list-group-item = link_to test.name, app_test_path(app, test)
+                = link_to test.name, app_test_path(app, test), class: 'list-group-item'
 
 .col-md-6
   h1.page-header
     | Current frameworks
     br
     small Which make all the magic
-  ul.list-group
+  .list-group
     - @frameworks.each do |framework|
-      li.list-group-item
-        = link_to framework.name, framework
+      = link_to framework.name, framework, class: 'list-group-item'
